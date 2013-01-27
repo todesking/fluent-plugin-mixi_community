@@ -22,6 +22,7 @@ class Fluent::MixiCommunityInput < Fluent::Input
   config_param :thread_title_pattern, :string
   config_param :recent_threads_num, :integer
   config_param :tag, :string
+  config_param :silent_startup, :bool, default: true
 
   def configure(config)
     super
@@ -49,13 +50,15 @@ class Fluent::MixiCommunityInput < Fluent::Input
   end
 
   def run
+    @first_time = true
     loop do
       begin
         fetch_and_emit
       rescue StandardError, Timeout::Error
-        $log.error("gree_community(community_id=#{@community_id}: #{$!.inspect}")
+        $log.error("mixi_community(community_id=#{@community_id}): #{$!.inspect}")
         $log.error_backtrace
       end
+      @first_time = false
       sleep @interval_sec
     end
   end
@@ -69,6 +72,8 @@ class Fluent::MixiCommunityInput < Fluent::Input
         last_comment_id = @last_comment_ids[[@community.id, th.id]]
         next if last_comment_id && comment.id <= last_comment_id
         @last_comment_ids[[@community.id, th.id]] = comment.id
+
+        next if @silent_startup && @first_time
 
         Fluent::Engine.emit(@tag, Fluent::Engine.now, {
           'community' => {
