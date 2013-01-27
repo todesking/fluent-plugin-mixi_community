@@ -52,6 +52,6 @@ Or install it yourself as:
 
 ## Changes
 
-### 0.0.1(unreleased)
+### 0.0.1
 
 * Initial release.
