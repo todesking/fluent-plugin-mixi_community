@@ -50,7 +50,12 @@ class Fluent::MixiCommunityInput < Fluent::Input
 
   def run
     loop do
-      fetch_and_emit
+      begin
+        fetch_and_emit
+      rescue StandardError, Timeout::Error
+        $log.error("gree_community(community_id=#{@community_id}: #{$!.inspect}")
+        $log.error_backtrace
+      end
       sleep @interval_sec
     end
   end
