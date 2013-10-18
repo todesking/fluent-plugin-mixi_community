@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name          = "fluent-plugin-mixi_community"
-  gem.version       = "0.0.1"
+  gem.version       = "0.0.2"
   gem.authors       = ["todesking"]
   gem.email         = ["discommunicative@gmail.com"]
   gem.summary       = %q{Fluentd input plugin, source from Mixi community}
@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_runtime_dependency "mixi-community"
+  gem.add_runtime_dependency "mixi-community", '>=0.0.3'
   gem.add_runtime_dependency "fluentd"
   gem.add_runtime_dependency "pit"
 end

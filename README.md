@@ -52,6 +52,10 @@ Or install it yourself as:
 
 ## Changes
 
+### 0.0.2
+
+* Dependency updated: mixi-community 0.0.3
+
 ### 0.0.1
 
 * Initial release.
