@@ -1,4 +1,4 @@
-# fluent-plugin-mixi_community
+# fluent-plugin-mixi_community, a plugin for [Fluentd](http://fluentd.org)
 
 Fluentd input plugin from Mixi community.
 
